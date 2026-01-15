@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Бериктай — цифровые решения для бизнеса</title>
   <meta name="description" content="QR-меню, мини-сайты и внутренние инструменты для малого бизнеса. Казахстан / удаленно. Портфолио и проекты: QR Menu, MarketHelp, Unity prototype." />
+
   <style>
     :root{
       --bg:#0b0d10;
@@ -17,45 +18,147 @@
       --accent:#7dd3fc;
       --accent2:#a78bfa;
       --good:#34d399;
+      --warn:#fbbf24;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --shadow2: 0 18px 60px rgba(0,0,0,.55);
       --radius: 18px;
+      --radius2: 22px;
+      --blur: blur(10px);
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 700px at 20% 0%, rgba(125,211,252,.12), transparent 60%),
-                  radial-gradient(900px 600px at 90% 20%, rgba(167,139,250,.10), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(125,211,252,.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, rgba(167,139,250,.10), transparent 55%),
+        radial-gradient(700px 500px at 40% 100%, rgba(52,211,153,.08), transparent 60%),
+        var(--bg);
       color:var(--text);
       line-height:1.55;
     }
     a{color:inherit}
+    img{max-width:100%; display:block}
     .container{
-      max-width: 1020px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 64px 18px 80px;
+      padding: 18px 18px 90px;
     }
 
-    /* header */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.4fr .9fr;
-      gap: 22px;
-      align-items: stretch;
+    /* ======= top nav ======= */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 12px 0;
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      background: rgba(11,13,16,.55);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
-    @media (max-width: 860px){
-      .hero{grid-template-columns:1fr}
+    .topbar-inner{
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
     }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .logo{
+      width: 34px; height: 34px; border-radius: 12px;
+      background:
+        radial-gradient(10px 10px at 30% 30%, rgba(125,211,252,.9), transparent 70%),
+        radial-gradient(12px 12px at 70% 60%, rgba(167,139,250,.85), transparent 70%),
+        rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .brand b{font-weight:600; letter-spacing:.2px}
+    .brand span{color:var(--muted); font-size:12.5px}
+
+    .nav{
+      display:flex; align-items:center; gap: 10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      text-decoration:none;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: .12s ease;
+    }
+    .nav a:hover{
+      color: var(--text);
+      border-color: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .nav .cta{
+      color: var(--text);
+      border-color: rgba(125,211,252,.25);
+      background: rgba(125,211,252,.08);
+    }
+
+    /* ======= generic cards ======= */
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: var(--radius2);
       box-shadow: var(--shadow);
       overflow:hidden;
+      position:relative;
     }
-    .card-inner{padding: 26px 26px 24px}
+    .card::after{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(600px 200px at 30% 0%, rgba(125,211,252,.10), transparent 60%),
+        radial-gradient(500px 220px at 80% 10%, rgba(167,139,250,.08), transparent 60%);
+      pointer-events:none;
+      opacity:.8;
+    }
+    .card > *{position:relative; z-index:1}
+
+    .section{
+      margin-top: 18px;
+      padding: 26px 26px;
+    }
+    .section h2{
+      margin: 0 0 14px;
+      font-size: 22px;
+      letter-spacing:.2px;
+    }
+    .lead{
+      margin: 0 0 10px;
+      color: var(--muted);
+      max-width: 880px;
+      font-size: 14.5px;
+    }
+
+    /* ======= hero ======= */
+    .hero-wrap{padding-top: 22px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.4fr .9fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .topbar-inner{flex-direction:column; align-items:flex-start}
+      .nav{justify-content:flex-start}
+    }
+
+    .card-inner{padding: 28px 28px 24px}
     .topline{
       display:flex;
       flex-wrap:wrap;
@@ -65,7 +168,7 @@
       margin-bottom: 14px;
     }
     .name{
-      font-size: 44px;
+      font-size: 46px;
       line-height: 1.05;
       margin: 0;
       letter-spacing: .2px;
@@ -73,7 +176,7 @@
     .role{
       margin: 10px 0 0;
       color: var(--muted);
-      max-width: 760px;
+      max-width: 820px;
       font-size: 16px;
     }
 
@@ -109,14 +212,15 @@
       justify-content:center;
       gap:10px;
       padding: 11px 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.04);
       text-decoration:none;
       color: var(--text);
-      font-weight: 500;
+      font-weight: 600;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       user-select:none;
+      cursor:pointer;
     }
     .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(125,211,252,.25)}
     .btn.primary{
@@ -124,7 +228,11 @@
       border-color: rgba(125,211,252,.25);
     }
     .btn.primary:hover{border-color: rgba(125,211,252,.45)}
-    .btn small{color:var(--muted); font-weight:400}
+    .btn.ghost{
+      background: rgba(0,0,0,.0);
+      border-color: rgba(255,255,255,.10);
+    }
+    .btn small{color:var(--muted); font-weight:500}
 
     .side{
       display:flex;
@@ -134,15 +242,15 @@
     .mini{
       background: rgba(255,255,255,.03);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: var(--radius2);
       padding: 18px;
     }
     .mini h3{
       margin:0 0 8px;
-      font-size: 14px;
+      font-size: 12px;
       color: var(--muted);
-      font-weight: 600;
-      letter-spacing:.2px;
+      font-weight: 700;
+      letter-spacing:.4px;
       text-transform: uppercase;
     }
     .mini p{
@@ -152,26 +260,35 @@
     }
     .kv{
       display:grid;
-      grid-template-columns: 120px 1fr;
+      grid-template-columns: 130px 1fr;
       gap: 8px 12px;
-      margin-top: 10px;
+      margin-top: 12px;
       align-items:baseline;
     }
     .k{color:var(--muted2); font-size: 13px}
     .v{color:var(--text); font-size: 13.5px}
     .v a{color: var(--accent); text-decoration:none}
     .v a:hover{text-decoration:underline}
+    .copy{
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .copy button{
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 6px 8px;
+      cursor:pointer;
+      font-size: 12px;
+      transition:.12s ease;
+    }
+    .copy button:hover{
+      color:var(--text);
+      border-color: rgba(125,211,252,.25);
+      background: rgba(255,255,255,.06);
+    }
 
-    /* sections */
-    .section{
-      margin-top: 26px;
-      padding: 22px 26px;
-    }
-    .section h2{
-      margin: 0 0 14px;
-      font-size: 22px;
-      letter-spacing:.2px;
-    }
+    /* ======= grids ======= */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -180,18 +297,48 @@
     @media (max-width: 980px){
       .grid{grid-template-columns:1fr}
     }
+
     .service{
       border: 1px solid var(--line);
       background: rgba(255,255,255,.03);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 14px 14px 12px;
     }
     .service b{display:block; margin-bottom:6px}
     .service span{color: var(--muted); font-size: 13.5px}
 
-    /* projects */
+    /* ======= process ======= */
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 980px){
+      .steps{grid-template-columns:1fr}
+    }
+    .step{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+    }
+    .step .n{
+      width: 28px; height: 28px; border-radius: 10px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(125,211,252,.10);
+      border: 1px solid rgba(125,211,252,.20);
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .step b{display:block; margin-bottom:6px}
+    .step span{color: var(--muted); font-size: 13.5px}
+
+    /* ======= projects ======= */
     .projects{
-      margin-top: 18px;
+      margin-top: 14px;
       display:grid;
       grid-template-columns: 1fr;
       gap: 12px;
@@ -199,14 +346,14 @@
     .project{
       border: 1px solid var(--line);
       background: rgba(255,255,255,.03);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 16px;
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap: 14px;
       align-items:start;
     }
-    @media (max-width: 860px){
+    @media (max-width: 900px){
       .project{grid-template-columns:1fr}
     }
     .project h3{
@@ -218,7 +365,7 @@
       margin:0;
       color: var(--muted);
       font-size: 14px;
-      max-width: 820px;
+      max-width: 860px;
     }
     .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top: 10px}
     .tag{
@@ -229,6 +376,33 @@
       padding: 6px 9px;
       border-radius: 999px;
     }
+    .shots{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 900px){
+      .shots{grid-template-columns:1fr}
+    }
+    .shot{
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      aspect-ratio: 16 / 10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--muted2);
+      font-size: 12px;
+    }
+    .shot img{
+      width:100%; height:100%; object-fit:cover;
+      transform: scale(1.01);
+    }
+
     .links{
       display:flex;
       flex-direction:column;
@@ -241,14 +415,228 @@
       border: 1px solid rgba(125,211,252,.18);
       background: rgba(125,211,252,.06);
       padding: 10px 12px;
-      border-radius: 12px;
+      border-radius: 14px;
       display:inline-flex;
       justify-content:space-between;
       gap: 10px;
+      transition:.12s ease;
     }
     .links a:hover{border-color: rgba(125,211,252,.35); background: rgba(125,211,252,.09)}
     .links a span{color: var(--muted); font-size: 12px}
 
+    /* ======= pricing ======= */
+    .pricing{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 980px){
+      .pricing{grid-template-columns:1fr}
+    }
+    .price{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 18px;
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .price.popular{
+      border-color: rgba(125,211,252,.28);
+      background: linear-gradient(180deg, rgba(125,211,252,.08), rgba(255,255,255,.03));
+    }
+    .price .label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,.02);
+    }
+    .price h3{margin:0 0 6px; font-size: 16px}
+    .price p{margin:0; color: var(--muted); font-size: 13.5px}
+    .price ul{margin: 10px 0 0; padding-left: 18px; color: var(--muted)}
+    .price li{margin: 6px 0}
+    .price .row{margin-top: 12px; display:flex; gap:10px; flex-wrap:wrap}
+    .muted-note{color: var(--muted2); font-size: 12.5px; margin-top: 10px}
+
+    /* ======= faq ======= */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    details{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      font-weight: 600;
+    }
+    summary::-webkit-details-marker{display:none}
+    .chev{
+      width: 26px; height: 26px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      display:flex; align-items:center; justify-content:center;
+      color: var(--muted);
+      transition:.12s ease;
+      flex: 0 0 auto;
+    }
+    details[open] .chev{transform: rotate(180deg); color: var(--text); border-color: rgba(125,211,252,.22)}
+    details p{margin:10px 0 0; color: var(--muted); font-size: 13.5px}
+
+    /* ======= contact ======= */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 900px){
+      .contact-grid{grid-template-columns:1fr}
+    }
+    .contact-card{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .contact-card h3{margin:0 0 8px; font-size: 16px}
+    .contact-card .items{display:flex; flex-direction:column; gap:8px}
+    .item{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+    }
+    .item a{color: var(--accent); text-decoration:none}
+    .item a:hover{text-decoration:underline}
+    .item small{color: var(--muted2)}
+    .item button{
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 6px 8px;
+      cursor:pointer;
+      font-size: 12px;
+      transition:.12s ease;
+    }
+    .item button:hover{
+      color:var(--text);
+      border-color: rgba(125,211,252,.25);
+      background: rgba(255,255,255,.06);
+    }
+
+    /* ======= modal ======= */
+    .backdrop{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 100;
+    }
+    .backdrop.show{display:flex}
+    .modal{
+      width: min(720px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(18,21,27,.85);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .modal-head{
+      padding: 16px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .modal-head b{font-size: 14px}
+    .x{
+      width: 36px; height: 36px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      transition:.12s ease;
+    }
+    .x:hover{border-color: rgba(125,211,252,.25); background: rgba(255,255,255,.06)}
+    .modal-body{padding: 16px 18px 18px}
+    .form{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 700px){
+      .form{grid-template-columns:1fr}
+    }
+    label{display:flex; flex-direction:column; gap:6px; color: var(--muted); font-size: 12.5px}
+    input, textarea, select{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      outline:none;
+      font-size: 14px;
+    }
+    textarea{min-height: 110px; resize: vertical}
+    .modal-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px}
+    .hint{color: var(--muted2); font-size: 12.5px; margin-top: 8px}
+
+    /* ======= toast ======= */
+    .toast{
+      position:fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 18px;
+      z-index: 200;
+      background: rgba(18,21,27,.92);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      padding: 10px 12px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      display:none;
+      color: var(--text);
+      font-size: 13px;
+      gap: 10px;
+      align-items:center;
+    }
+    .toast.show{display:flex}
+    .toast .ok{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--good);
+      box-shadow: 0 0 0 3px rgba(52,211,153,.12);
+    }
+
+    /* footer */
     .footer{
       margin-top: 20px;
       text-align:center;
@@ -256,82 +644,178 @@
       font-size: 13px;
       opacity: .9;
     }
+
+    /* subtle reveal (no heavy animations) */
+    .reveal{opacity: 0; transform: translateY(10px); transition: .35s ease}
+    .reveal.on{opacity: 1; transform: translateY(0px)}
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <!-- HERO -->
-    <div class="hero">
-      <div class="card">
-        <div class="card-inner">
-          <div class="topline">
-            <div>
-              <h1 class="name">Бериктай</h1>
-              <p class="role">
-                Делаю понятные цифровые решения для малого бизнеса: <b>QR-меню</b>, <b>мини-сайты</b> и <b>внутренние инструменты</b>.
-                Моя цель — убрать хаос и сделать так, чтобы всё было просто, аккуратно и работало.
-              </p>
-            </div>
-            <div class="badges">
-              <div class="badge"><span class="dot"></span>Доступен для проектов</div>
-              <div class="badge">Казахстан · удаленно</div>
-            </div>
-          </div>
-
-          <div class="cta-row">
-            <a class="btn primary" href="https://t.me/chaplincharley" target="_blank" rel="noopener noreferrer">
-              Написать в Telegram <small>@chaplincharley</small>
-            </a>
-            <a class="btn" href="#projects">Посмотреть проекты</a>
-          </div>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <b>Бериктай</b><br/>
+          <span>цифровые решения для бизнеса</span>
         </div>
+      </a>
+
+      <div class="nav">
+        <a href="#services">Услуги</a>
+        <a href="#projects">Проекты</a>
+        <a href="#pricing">Форматы</a>
+        <a href="#faq">FAQ</a>
+        <a class="cta" href="#contact">Контакты</a>
+        <a class="cta" href="#" id="openModalTop">Оставить заявку</a>
       </div>
+    </div>
+  </div>
 
-      <div class="side">
-        <div class="mini">
-          <h3>Что я делаю</h3>
-          <p>Быстрые, аккуратные решения, которые реально помогают бизнесу в работе.</p>
-          <div class="kv">
-            <div class="k">Формат</div><div class="v">Проектно · удаленно</div>
-            <div class="k">Фокус</div><div class="v">простота, скорость, ясность</div>
-            <div class="k">Контакт</div>
-            <div class="v">
-              <a href="https://t.me/chaplincharley" target="_blank" rel="noopener noreferrer">t.me/chaplincharley</a>
+  <div class="container" id="top">
+    <!-- HERO -->
+    <div class="hero-wrap">
+      <div class="hero">
+
+        <div class="card reveal">
+          <div class="card-inner">
+            <div class="topline">
+              <div>
+                <h1 class="name">Бериктай</h1>
+                <p class="role">
+                  Делаю понятные цифровые решения для малого бизнеса:
+                  <b>QR-меню</b>, <b>мини-сайты</b> и <b>внутренние инструменты</b>.
+                  Моя цель — убрать хаос и сделать так, чтобы всё было просто, аккуратно и работало.
+                </p>
+              </div>
+              <div class="badges">
+                <div class="badge"><span class="dot"></span>Доступен для проектов</div>
+                <div class="badge">Казахстан · удаленно</div>
+              </div>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn primary" href="https://t.me/chaplincharley" target="_blank" rel="noopener noreferrer">
+                Написать в Telegram <small>@chaplincharley</small>
+              </a>
+              <a class="btn" href="https://wa.me/77073823028" target="_blank" rel="noopener noreferrer">
+                WhatsApp <small>+7 707 382 30 28</small>
+              </a>
+              <button class="btn ghost" id="openModalHero">Оставить заявку</button>
+              <a class="btn" href="#projects">Посмотреть проекты</a>
             </div>
           </div>
         </div>
 
-        <div class="mini">
-          <h3>Основные услуги</h3>
-          <p>QR-меню · лендинг · небольшие веб-инструменты · доработка и исправления.</p>
+        <div class="side">
+          <div class="mini reveal">
+            <h3>Коротко обо мне</h3>
+            <p>Делаю быстрые, аккуратные решения, которые реально помогают бизнесу в работе.</p>
+            <div class="kv">
+              <div class="k">Формат</div><div class="v">Проектно · удаленно</div>
+              <div class="k">Сильная сторона</div><div class="v">простота, скорость, ясность</div>
+              <div class="k">Гео</div><div class="v">Казахстан (страна)</div>
+              <div class="k">Контакт</div>
+              <div class="v">
+                <span class="copy">
+                  <a href="https://t.me/chaplincharley" target="_blank" rel="noopener noreferrer">t.me/chaplincharley</a>
+                  <button data-copy="https://t.me/chaplincharley">Copy</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini reveal">
+            <h3>Быстрые ссылки</h3>
+            <div class="kv">
+              <div class="k">Threads/IG</div>
+              <div class="v">
+                <a href="https://instagram.com/beriktaykd" target="_blank" rel="noopener noreferrer">@beriktaykd</a>
+              </div>
+
+              <div class="k">WhatsApp</div>
+              <div class="v">
+                <span class="copy">
+                  <a href="https://wa.me/77073823028" target="_blank" rel="noopener noreferrer">wa.me/77073823028</a>
+                  <button data-copy="+77073823028">Copy</button>
+                </span>
+              </div>
+
+              <div class="k">GitHub</div>
+              <div class="v">
+                <a href="https://github.com/ChaplinCharley" target="_blank" rel="noopener noreferrer">github.com/ChaplinCharley</a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
 
     <!-- SERVICES -->
-    <div class="card section">
+    <div id="services" class="card section reveal">
       <h2>Чем могу быть полезен</h2>
+      <p class="lead">
+        Я делаю вещи, которые бизнесу реально нужны: чтобы быстро запустить, не путаться и не делать всё руками.
+      </p>
+
       <div class="grid">
         <div class="service">
           <b>QR-меню для заведений</b>
-          <span>Мобильная версия, категории, удобная навигация. Работает по ссылке или через QR.</span>
+          <span>Мобильная версия, категории, быстрые обновления. Можно по ссылке или через QR.</span>
         </div>
         <div class="service">
           <b>Мини-сайты и лендинги</b>
-          <span>Быстро, аккуратно, без лишнего. Контакты, услуги, прайс, кнопки связи.</span>
+          <span>Услуги, контакты, прайс, кнопки связи. Чисто, быстро, без «лишнего».</span>
         </div>
         <div class="service">
           <b>Внутренние инструменты</b>
-          <span>Учет, процессы, экспорт/импорт, автоматизация рутины — чтобы меньше руками.</span>
+          <span>Учёт, процессы, экспорт/импорт, автоматизация рутины — чтобы меньше руками.</span>
         </div>
       </div>
     </div>
 
+    <!-- HOW I WORK -->
+    <div class="card section reveal">
+      <h2>Как я работаю</h2>
+      <p class="lead">Простой процесс без хаоса. Вы понимаете, что будет сделано, и в какие сроки.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <b>Короткий созвон/переписка</b>
+          <span>Понимаю задачу: что нужно, кому, и как будет пользоваться.</span>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <b>План и структура</b>
+          <span>Согласуем разделы, формат, и что важно показать в первую очередь.</span>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <b>Сборка и тест</b>
+          <span>Делаю быстро, проверяю на телефоне/ПК, исправляю мелочи.</span>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <b>Запуск и поддержка</b>
+          <span>Публикую/настраиваю. Если надо — объясняю, как обновлять.</span>
+        </div>
+      </div>
+
+      <div class="cta-row" style="margin-top:14px">
+        <button class="btn primary" id="openModalProcess">Оставить заявку</button>
+        <a class="btn" href="#projects">Сразу к проектам</a>
+      </div>
+    </div>
+
     <!-- PROJECTS -->
-    <div id="projects" class="card section">
+    <div id="projects" class="card section reveal">
       <h2>Проекты</h2>
+      <p class="lead">Три кейса: веб-решение для бизнеса, рабочее QR-меню и Unity-прототип.</p>
 
       <div class="projects">
 
@@ -339,19 +823,37 @@
           <div>
             <h3>QR-меню (Like Shymkent)</h3>
             <p>
-              Репозиторий проекта QR-меню. Подходит для кафе, ресторанов и заведений с меню на телефон:
-              удобная структура категорий, адаптация под мобильные устройства.
+              Репозиторий проекта QR-меню. Подходит для кафе, ресторанов и заведений:
+              удобная структура категорий, адаптация под смартфон, быстрое обновление меню.
             </p>
+
             <div class="tags">
               <span class="tag">React</span>
               <span class="tag">TypeScript</span>
               <span class="tag">TailwindCSS</span>
-              <span class="tag">UI</span>
+              <span class="tag">Mobile-first</span>
+            </div>
+
+            <!-- Скрины: ты можешь заменить ссылки на свои, или оставить заглушки -->
+            <div class="shots">
+              <div class="shot">
+                <img src="https://github.com/ChaplinCharley/Like_Shym_QR/blob/main/public/screenshots/1.jpeg?raw=true" alt="QR Menu screenshot 1">
+              </div>
+              <div class="shot">
+                <img src="https://github.com/ChaplinCharley/Like_Shym_QR/blob/main/public/screenshots/2.jpeg?raw=true" alt="QR Menu screenshot 2">
+              </div>
+              <div class="shot">
+                <img src="https://github.com/ChaplinCharley/Like_Shym_QR/blob/main/public/screenshots/3.jpeg?raw=true" alt="QR Menu screenshot 3">
+              </div>
             </div>
           </div>
+
           <div class="links">
             <a href="https://github.com/ChaplinCharley/Like_Shym_QR" target="_blank" rel="noopener noreferrer">
               GitHub репозиторий <span>исходники</span>
+            </a>
+            <a href="https://like-shym-qr.vercel.app" target="_blank" rel="noopener noreferrer">
+              Демо (Vercel) <span>живой сайт</span>
             </a>
           </div>
         </div>
@@ -360,8 +862,9 @@
           <div>
             <h3>MarketHelp (в разработке)</h3>
             <p>
-              Веб-проект для автоматизации работы с карточками товаров и рутиной в бизнес-процессах:
-              пресеты, обработка данных, экспорт/подготовка материалов. Проект храню как портфолио и основу для развития.
+              Веб-проект для автоматизации работы с данными и рутиной:
+              пресеты, обработка изображений/таблиц, экспорт и подготовка материалов.
+              Храню как портфолио и основу для развития.
             </p>
             <div class="tags">
               <span class="tag">Python</span>
@@ -381,8 +884,8 @@
           <div>
             <h3>Alchemist Mobile (Unity prototype)</h3>
             <p>
-              Прототип мобильной 2D-игры на Unity: структура проекта, UI, механики и скрипты.
-              Использую как демонстрацию навыков и подхода к разработке.
+              Прототип мобильной 2D-игры на Unity: UI, механики, скрипты.
+              Использую как демонстрацию разработки и структуры проекта.
             </p>
             <div class="tags">
               <span class="tag">Unity</span>
@@ -401,28 +904,346 @@
       </div>
     </div>
 
-    <!-- CONTACT -->
-    <div class="card section">
-      <h2>Контакты</h2>
-      <p style="margin:0; color: var(--muted);">
-        Страна: Казахстан · работаю удаленно.<br/>
-        Telegram:
-        <a href="https://t.me/chaplincharley" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:none;">
-          @chaplincharley
-        </a>
+    <!-- PRICING -->
+    <div id="pricing" class="card section reveal">
+      <h2>Форматы работы</h2>
+      <p class="lead">
+        Чтобы людям было проще решиться — даю понятные варианты. Цены можно не указывать — просто ориентиры по объёму.
       </p>
-      <div class="cta-row">
-        <a class="btn primary" href="https://t.me/chaplincharley" target="_blank" rel="noopener noreferrer">
-          Написать мне
-        </a>
-        <a class="btn" href="#projects">Открыть проекты</a>
+
+      <div class="pricing">
+        <div class="price">
+          <div class="label">Быстро</div>
+          <h3>Старт</h3>
+          <p>Когда нужно “сделать и запустить”.</p>
+          <ul>
+            <li>Одна страница / простой сайт</li>
+            <li>Контакты, услуги, кнопки связи</li>
+            <li>Базовая моб. адаптация</li>
+          </ul>
+          <div class="row">
+            <button class="btn" data-plan="Старт">Оставить заявку</button>
+          </div>
+          <div class="muted-note">Подходит: визитка, мини-лендинг.</div>
+        </div>
+
+        <div class="price popular">
+          <div class="label"><span style="color:var(--warn)">★</span> Самый частый</div>
+          <h3>QR-меню</h3>
+          <p>Для заведений: чтобы гости открывали меню со смартфона.</p>
+          <ul>
+            <li>Категории, позиции, цены</li>
+            <li>Мобильная навигация</li>
+            <li>Инструкция “как обновлять меню”</li>
+          </ul>
+          <div class="row">
+            <button class="btn primary" data-plan="QR-меню">Оставить заявку</button>
+          </div>
+          <div class="muted-note">Подходит: чайхана, кафе, фастфуд.</div>
+        </div>
+
+        <div class="price">
+          <div class="label">Инструмент</div>
+          <h3>Автоматизация</h3>
+          <p>Когда ручной труд съедает время.</p>
+          <ul>
+            <li>Экспорт/импорт</li>
+            <li>Пресеты, обработка данных</li>
+            <li>Упрощение процессов</li>
+          </ul>
+          <div class="row">
+            <button class="btn" data-plan="Автоматизация">Оставить заявку</button>
+          </div>
+          <div class="muted-note">Подходит: учёт, рутина, отчёты.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div id="faq" class="card section reveal">
+      <h2>FAQ</h2>
+      <p class="lead">Короткие ответы на частые вопросы клиентов.</p>
+
+      <div class="faq">
+        <details>
+          <summary>
+            Сколько времени занимает QR-меню?
+            <span class="chev">⌄</span>
+          </summary>
+          <p>
+            Обычно можно сделать быстро: зависит от количества позиций и готовности контента.
+            Если меню уже есть (фото/таблица) — идёт быстрее.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            Как обновлять меню потом?
+            <span class="chev">⌄</span>
+          </summary>
+          <p>
+            Я делаю так, чтобы было просто: либо вы меняете файл/данные и обновляете,
+            либо я могу обновлять за вас по запросу.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            Можно ли на казахстанские карты?
+            <span class="chev">⌄</span>
+          </summary>
+          <p>
+            По оплате договоримся удобным способом (Kaspi/перевод и т.д.). Я работаю с Казахстаном и удалённо.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            А если у меня уже есть сайт, но кривой?
+            <span class="chev">⌄</span>
+          </summary>
+          <p>
+            Можно. Часто достаточно “привести в порядок”: убрать лишнее, сделать моб. версию,
+            ускорить загрузку, поправить дизайн/структуру.
+          </p>
+        </details>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="card section reveal">
+      <h2>Контакты</h2>
+      <p class="lead">Лучше всего писать в Telegram. Также доступен WhatsApp.</p>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Связаться</h3>
+          <div class="items">
+            <div class="item">
+              <div>
+                <b>Telegram</b><br/>
+                <a href="https://t.me/chaplincharley" target="_blank" rel="noopener noreferrer">@chaplincharley</a>
+              </div>
+              <button data-copy="@chaplincharley">Copy</button>
+            </div>
+
+            <div class="item">
+              <div>
+                <b>WhatsApp</b><br/>
+                <a href="https://wa.me/77073823028" target="_blank" rel="noopener noreferrer">+7 707 382 30 28</a>
+              </div>
+              <button data-copy="+77073823028">Copy</button>
+            </div>
+
+            <div class="item">
+              <div>
+                <b>Threads / Instagram</b><br/>
+                <a href="https://instagram.com/beriktaykd" target="_blank" rel="noopener noreferrer">@beriktaykd</a>
+              </div>
+              <button data-copy="@beriktaykd">Copy</button>
+            </div>
+          </div>
+
+          <div class="cta-row" style="margin-top:12px">
+            <button class="btn primary" id="openModalContact">Оставить заявку</button>
+            <a class="btn" href="#projects">Открыть проекты</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>О себе</h3>
+          <p style="margin:0; color: var(--muted);">
+            Страна: Казахстан · работаю удалённо.<br/>
+            Люблю делать простые вещи, которые снимают хаос: учёт, процессы, контроль, понятность.
+          </p>
+          <p style="margin:10px 0 0; color: var(--muted2); font-size: 13px;">
+            Если напишете: “Нужно QR-меню / сайт / инструмент”, я быстро отвечу и скажу что реально сделать.
+          </p>
+        </div>
       </div>
     </div>
 
     <div class="footer">
-      © 2026 · Бериктай · Портфолио
+      © 2026 · Бериктай · Портфолио (GitHub Pages)
     </div>
 
   </div>
+
+  <!-- MODAL -->
+  <div class="backdrop" id="backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Оставить заявку">
+      <div class="modal-head">
+        <b>Оставить заявку</b>
+        <button class="x" id="closeModal" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+          <label>
+            Что нужно?
+            <select id="need">
+              <option>QR-меню</option>
+              <option>Мини-сайт / лендинг</option>
+              <option>Внутренний инструмент / автоматизация</option>
+              <option>Доработка / исправления</option>
+              <option>Другое</option>
+            </select>
+          </label>
+
+          <label>
+            Город (необязательно)
+            <input id="city" placeholder="Напр. Шымкент / Алматы" />
+          </label>
+
+          <label style="grid-column:1 / -1">
+            Коротко про задачу
+            <textarea id="desc" placeholder="Что хотите сделать? Сколько позиций/страниц? Какие сроки?"></textarea>
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn primary" id="sendTG">Отправить в Telegram</button>
+          <button class="btn" id="sendWA">Отправить в WhatsApp</button>
+          <button class="btn ghost" id="copyText">Скопировать текст</button>
+        </div>
+
+        <div class="hint">
+          Это не “форма на сервер” — текст просто красиво собирается и отправляется вам в TG/WA.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="ok"></span>
+    <span id="toastText">Скопировано</span>
+  </div>
+
+  <script>
+    // ===== reveal on scroll (light) =====
+    const revealEls = Array.from(document.querySelectorAll('.reveal'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('on');
+      });
+    }, {threshold: 0.12});
+    revealEls.forEach(el => io.observe(el));
+
+    // ===== toast =====
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toastText');
+    let toastTimer = null;
+
+    function showToast(text){
+      toastText.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 1700);
+    }
+
+    // ===== copy helper =====
+    async function copyToClipboard(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast('Скопировано: ' + text);
+      }catch(e){
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        showToast('Скопировано: ' + text);
+      }
+    }
+
+    document.querySelectorAll('[data-copy]').forEach(btn => {
+      btn.addEventListener('click', () => copyToClipboard(btn.getAttribute('data-copy')));
+    });
+
+    // ===== modal logic =====
+    const backdrop = document.getElementById('backdrop');
+    const closeModal = document.getElementById('closeModal');
+
+    const openButtons = [
+      document.getElementById('openModalTop'),
+      document.getElementById('openModalHero'),
+      document.getElementById('openModalProcess'),
+      document.getElementById('openModalContact'),
+    ].filter(Boolean);
+
+    function openModal(prefillPlan){
+      backdrop.classList.add('show');
+      backdrop.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+
+      if(prefillPlan){
+        const need = document.getElementById('need');
+        // if coming from pricing
+        if(prefillPlan === 'QR-меню') need.value = 'QR-меню';
+        if(prefillPlan === 'Старт') need.value = 'Мини-сайт / лендинг';
+        if(prefillPlan === 'Автоматизация') need.value = 'Внутренний инструмент / автоматизация';
+      }
+
+      setTimeout(() => document.getElementById('desc').focus(), 50);
+    }
+
+    function close(){
+      backdrop.classList.remove('show');
+      backdrop.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+
+    openButtons.forEach(b => b.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    }));
+
+    closeModal.addEventListener('click', close);
+    backdrop.addEventListener('click', (e) => {
+      if(e.target === backdrop) close();
+    });
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && backdrop.classList.contains('show')) close();
+    });
+
+    // open from pricing
+    document.querySelectorAll('[data-plan]').forEach(btn => {
+      btn.addEventListener('click', () => openModal(btn.getAttribute('data-plan')));
+    });
+
+    // ===== message builder =====
+    function buildMessage(){
+      const need = document.getElementById('need').value.trim();
+      const city = document.getElementById('city').value.trim();
+      const desc = document.getElementById('desc').value.trim();
+
+      const lines = [];
+      lines.push('Здравствуйте! Хочу заказать: ' + need);
+      if(city) lines.push('Город: ' + city);
+      if(desc) lines.push('Описание: ' + desc);
+      lines.push('');
+      lines.push('Контакт: (оставьте ваш номер/ник)');
+      return lines.join('\n');
+    }
+
+    const TG_USER = 'chaplincharley';
+    const WA_PHONE = '77073823028';
+
+    document.getElementById('copyText').addEventListener('click', async () => {
+      await copyToClipboard(buildMessage());
+    });
+
+    document.getElementById('sendTG').addEventListener('click', () => {
+      const text = encodeURIComponent(buildMessage());
+      window.open('https://t.me/' + TG_USER + '?text=' + text, '_blank');
+    });
+
+    document.getElementById('sendWA').addEventListener('click', () => {
+      const text = encodeURIComponent(buildMessage());
+      window.open('https://wa.me/' + WA_PHONE + '?text=' + text, '_blank');
+    });
+  </script>
 </body>
 </html>
